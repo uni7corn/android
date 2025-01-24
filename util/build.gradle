@@ -19,8 +19,8 @@ android {
 	}
 
 	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_8
-		targetCompatibility JavaVersion.VERSION_1_8
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
 	}
 	packagingOptions {
 		jniLibs {
@@ -53,7 +53,10 @@ dependencies {
 
 	implementation dependencies.androidxPreference
 
+	implementation dependencies.joseJwt
+
 	// test
+	androidTestImplementation dependencies.junitParams
 	androidTestImplementation dependencies.androidxTestCore
 	androidTestImplementation(dependencies.runner) {
 		exclude group: 'com.android.support', module: 'support-annotations'
@@ -62,6 +65,7 @@ dependencies {
 	androidTestImplementation(dependencies.rules) {
 		exclude group: 'com.android.support', module: 'support-annotations'
 	}
+	androidTestImplementation dependencies.mockitoAndroid
 
 	testImplementation dependencies.junit
 	testImplementation dependencies.junitApi

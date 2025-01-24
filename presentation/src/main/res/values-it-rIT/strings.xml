@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 	<!-- # app -->
-	<string name="share_with_label">Crittografa</string>
+	<string name="share_with_label">Cripta</string>
 	<!-- # error messages -->
 	<string name="error_generic">Si è verificato un errore</string>
 	<string name="error_authentication_failed">Autenticazione non riuscita</string>
@@ -25,16 +25,22 @@
 	<string name="error_general_update">Controllo dell\'aggiornamento non riuscito. Si è verificato un errore generale.</string>
 	<string name="error_hash_mismatch_update">Controllo di aggiornamento non riuscito. L\'hash calcolato non corrisponde al file caricato</string>
 	<string name="error_update_no_internet">Controllo aggiornamento non riuscito. Nessuna connessione internet.</string>
-	<string name="error_failed_to_decrypt_webdav_password">Impossibile decrittografare la password WebDAV, aggiungere nuovamente nelle impostazioni</string>
+	<string name="error_failed_to_decrypt_webdav_password">Impossibile decriptare la password WebDAV, aggiungere nuovamente nelle impostazioni</string>
 	<string name="error_play_services_not_available">Google Play Services non installati</string>
 	<string name="error_biometric_auth_aborted">Autenticazione biometrica interrotta</string>
 	<string name="error_vault_version_mismatch">La versione specificata in %1$s è diversa da %2$s</string>
 	<string name="error_vault_key_invalid">%1$s non corrisponde a questo %2$s</string>
 	<string name="error_vault_config_loading">Errore generale durante il caricamento della configurazione della cassaforte</string>
 	<string name="error_file_not_found_after_opening_using_3party">Il file locale non è più presente dopo essere tornato a Cryptomator. Le eventuali modifiche non possono essere riprodotte nel cloud.</string>
-	<string name="error_no_such_bucket">Nessun secchio simile</string>
-	<string name="error_masterkey_location_not_supported">Posizione della Chiave Principale Personalizzata non ancora supportata</string>
-	<string name="error_interact_with_fdroid_but_fdroid_missing">Non sei riuscito a comunicare con l\'app F-Droid. Non installata?</string>
+	<string name="error_no_such_bucket">Nessun bucket di questo tipo</string>
+	<string name="error_masterkey_location_not_supported">Posizione personalizzata della Chiave Principale non ancora supportata</string>
+	<string name="error_interact_with_fdroid_but_fdroid_missing">Impossibile comunicare con l\'app F-Droid. Forse non è installata?</string>
+	<string name="error_hub_vault_operation_not_supported">Hub non supporta l\'operazione sulla cassaforte</string>
+	<string name="error_hub_authentication_failed">Autenticazione su Hub non riuscita</string>
+	<string name="error_hub_device_already_register_for_other_user">Questo dispositivo è già registrato per un utente diverso. Prova a cambiare l\'account utente o usa un altro dispositivo.</string>
+	<string name="error_hub_invalid_setup_code">Chiave account non valida.</string>
+	<string name="error_hub_invalid_version">Versione Hub non supportata.</string>
+	<string name="error_hub_unlock_pre_31">Hub è supportato solo su Android 12 o superiore.</string>
 	<!-- # clouds -->
 	<!-- ## cloud names -->
 	<string name="cloud_names_local_storage">Archivio locale</string>
@@ -67,7 +73,7 @@
 	<string name="screen_vault_list_change_password_successful">Password modificata con successo</string>
 	<!-- # screen: file browser -->
 	<string name="screen_file_browser_default_title">Cassaforte</string>
-	<string name="screen_file_browser_add_existing_vault_extra_text">Seleziona il file della chiave principale</string>
+	<string name="screen_file_browser_add_existing_vault_extra_text">Seleziona la chiave principale o il file della cassaforte</string>
 	<string name="screen_file_browser_create_new_vault_button_text">Posiziona qui</string>
 	<string name="screen_file_browser_create_new_vault_extra_text">Nome cassaforte: %1$s</string>
 	<plurals name="screen_file_browser_subtitle_move">
@@ -185,7 +191,7 @@
 	<string name="screen_settings_section_auto_photo_upload_including_videos">Carica video</string>
 	<string name="screen_settings_auto_photo_upload_title">Salva i file caricati automaticamente in&#8230;</string>
 	<string name="screen_settings_website_label">Sito web di Cryptomator</string>
-	<string name="screen_settings_twitter_label">Seguici su Twitter</string>
+	<string name="screen_settings_mastodon_label">Seguici su Mastodon</string>
 	<string name="screen_settings_facebook_label">Metti mi piace su Facebook</string>
 	<string name="screen_settings_section_legal">Legale</string>
 	<string name="screen_settings_licenses_label">Licenze</string>
@@ -198,6 +204,8 @@
 	<string name="screen_settings_security_label">Suggerimenti di sicurezza</string>
 	<string name="screen_settings_section_version">Versione</string>
 	<string name="screen_settings_advanced_settings">Impostazioni Avanzate</string>
+	<string name="screen_settings_microsoft_apps_workaround_label">Soluzione per aprire i file Microsoft</string>
+	<string name="screen_settings_microsoft_apps_workaround_summary">Apri file nelle app Microsoft con i permessi di scrittura</string>
 	<string name="screen_settings_background_unlock_preparation_label">Accelera sblocco</string>
 	<string name="screen_settings_background_unlock_preparation_label_summary">Scarica la configurazione della cassaforte in background quando è stato richiesto di inserire la password o l\'autenticazione biometrica</string>
 	<string name="screen_settings_keep_unlocked_while_editing_files">Mantieni sbloccato</string>
@@ -304,17 +312,18 @@
 	<string name="dialog_debug_mode_disclaimer_hint">In questa modalità, i dati sensibili possono essere scritti in un file di registro sul dispositivo (ad es. nomi di file e percorsi). Password, cookie, ecc. sono esplicitamente esclusi.\n\nRicorda di disabilitare la modalità di debug il prima possibile.</string>
 	<string name="dialog_debug_mode_disclaimer_title">Attenzione</string>
 	<string name="dialog_debug_mode_positive_button">Abilita</string>
-	<string name="dialog_disable_app_obscured_disclaimer_hint">Questa impostazione è una funzione di sicurezza e impedisce ad altre applicazioni di ingannare gli utenti a fare cose che non sono in grado di fare.\n\nDisabilitando confermi di essere <a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">a conoscenza dei rischi</a>.</string>
+	<string name="dialog_microsoft_workaround_disclaimer_hint">A causa di un bug nelle applicazioni Microsoft, il file da modificare deve essere condiviso con queste applicazioni in una cartella pubblica sul tuo dispositivo. Dopo aver riavviato Cryptomator, il file accessibile pubblicamente viene nuovamente eliminato, ma Cryptomator non può controllare cosa sia successo a questo file nel frattempo. Assicurati di essere a conoscenza di questo comportamento quando attivi questa opzione. Questo si applica solo ai formati di file Microsoft.\n\nCryptomator si riavvia dopo l\'attivazione.</string>
+	<string name="dialog_disable_app_obscured_disclaimer_hint">Questa impostazione è una funzione di sicurezza e impedisce ad altre applicazioni di spingere gli utenti a fare cose che non vogliono.\n\nDisabilitandola confermi di essere <a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">consapevole dei rischi</a>.</string>
 	<string name="dialog_disable_app_obscured_disclaimer_title">Attenzione</string>
 	<string name="dialog_disable_app_obscured_positive_button">Disabilita</string>
 	<string name="dialog_app_is_obscured_info_title">L\'app è oscurata</string>
-	<string name="dialog_app_is_obscured_info_hint">Un\'altra app sta mostrando qualcosa sopra a Cryptomator (ad esempio, un filtro luce blu o applicazione modalità notte). Per motivi di sicurezza, Cryptomator è disabilitato.\n\n<a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">Come abilitare Cryptomator</a></string>
+	<string name="dialog_app_is_obscured_info_hint">Un\'altra app sta mostrando qualcosa sopra a Cryptomator (e.g., un filtro per la luce blu o la modalità notte di un\'app). Per motivi di sicurezza, Cryptomator è disabilitato.\n\n<a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">Come abilitare Cryptomator</a></string>
 	<string name="dialog_app_is_obscured_info_neutral_button">Chiudi</string>
 	<string name="dialog_vaults_removed_during_migration_title">Si prega di ri-aggiungere cassaforti per il cloud %1s</string>
 	<string name="dialog_vaults_removed_during_migration_hint">Durante la migrazione a questa versione dell\'app abbiamo avuto bisogno di rimuovere le seguenti cassaforti dall\'app:\n%2s \n\nQueste cassaforti non sono state rimosse dal cloud ma solo da questa app. Siamo spiacenti per l\'inconveniente e si prega di ri-aggiungere queste cassaforti per continuare ad usarle.</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_title">La cassaforte è la cartella root della connessione al cloud</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_hint">Crea una nuova connessione al cloud dove bisogna selezionare almeno la cartella padre di questa cassaforte come cartella radice per aggiungere questa cassaforte.</string>
-	<string name="dialog_disable_secure_screen_disclaimer_hint">Questa impostazione è una funzione di sicurezza e impedisce ad altre applicazioni di ingannare gli utenti a fare cose che non sono in grado di fare.\n\nDisabilitando confermi di essere <a href="https://docs.cryptomator.org/en/1.6/android/settings/#screen-security">a conoscenza dei rischi</a>.</string>
+	<string name="dialog_disable_secure_screen_disclaimer_hint">Questa impostazione è una funzione di sicurezza e impedisce ad altre applicazioni di spingere gli utenti a fare cose che non vogliono.\n\nDisabilitandola confermi di essere <a href="https://docs.cryptomator.org/en/latest/android/settings/#screen-security">consapevole dei rischi</a>.</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_message">Sei sicuro di voler rimuovere questa connessione cloud?</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_hint">Questa azione rimuoverà la connessione cloud e tutte le cassaforti di questo cloud.</string>
 	<string name="dialog_confirm_delete_multiple_title">Eliminare %1$d elementi?</string>
@@ -346,8 +355,29 @@
 	<string name="dialog_no_more_images_to_display">Niente più immagini da visualizzare&#8230;</string>
 	<string name="dialog_pcloud_credentials_updated_title">Credenziali di \'%1$s\' aggiornate</string>
 	<string name="dialog_pcloud_credentials_updated">Se hai intenzione di aggiungere un nuovo account pCloud, tocca questo url <a href="https://www.pcloud.com">www.pcloud. om</a>, esci dall\'account corrente e tocca di nuovo il \'+\' in questa app per creare una nuova connessione cloud.</string>
+	<string name="dialog_cbc_password_vaults_migration_title">Richiesta migrazione password della cassaforte</string>
+	<string name="dialog_cbc_password_vaults_migration_hint">A causa di miglioramenti di sicurezza, ti verrà chiesta l\'autenticazione biometrica due volte per ogni cassaforte per ri-crittografare la password della tua cassaforte. Questo è necessario per continuare a proteggere le password della tua cassaforte con la tecnologia più recente. Se non si desidera che ciò accada, le password memorizzate verranno rimosse.</string>
+	<string name="dialog_cbc_password_vaults_migration_action">Migra</string>
+	<string name="dialog_create_hub_device_title">Registra dispositivo Hub</string>
+	<string name="dialog_create_hub_device_name_label">Nome</string>
+	<string name="dialog_create_hub_device_name_hint">Sembra che questo sia il primo accesso alle Centrali delle Casseforti da questo dispositivo. Per poterlo identificare ai fini dell\'autorizzazione all\'accesso è necessario dare un nome a questo dispositivo.</string>
+	<string name="dialog_create_hub_device_name_empty">Il nome non può essere vuoto.</string>
+	<string name="dialog_create_hub_device_setup_code_label">Chiave dell\'account</string>
+	<string name="dialog_create_hub_device_setup_code_hint">La chiave del tuo account è richiesta per accedere da nuove applicazioni o browser. Può essere trovata nel tuo profilo.</string>
+	<string name="dialog_create_hub_device_setup_code_empty">La chiave dell\'account non può essere vuota.</string>
+	<string name="dialog_progress_creating_hub_device_setup">Creazione dispositivo&#8230;</string>
+	<string name="dialog_hub_vault_access_forbidden_title">Accesso negato</string>
+	<string name="dialog_hub_vault_access_forbidden_hint">Il tuo utente non è ancora stato autorizzato ad accedere a questa cassaforte. Chiedi al proprietario della cassaforte di autorizzarti.\"</string>
+	<string name="dialog_hub_license_upgrade_required_title">Controlla la licenza Hub</string>
+	<string name="dialog_hub_license_upgrade_required_hint">La tua istanza Cryptomator Hub ha una licenza non valida. Si prega di informare un amministratore Hub per aggiornare o rinnovare la licenza.\"</string>
+	<string name="dialog_hub_vault_archived_title">Cassaforte archiviata</string>
+	<string name="dialog_hub_vault_archived_hint">Questa cassaforte è archiviata e non può essere sbloccata. Per sbloccarla, il proprietario della cassaforte deve ripristinarla dall\'archivio.</string>
+	<string name="dialog_hub_user_setup_required_title">Richiesta configurazione dell\'utente</string>
+	<string name="dialog_hub_user_setup_required_hint">Per procedere, completa i passaggi richiesti nel tuo profilo dell\'Hub.</string>
+	<string name="dialog_hub_user_setup_required_neutral_button">Vai al profilo</string>
 	<string name="permission_snackbar_auth_local_vault">Cryptomator ha bisogno dell\'accesso all\'archivio per utilizzare le cassaforti locali</string>
 	<string name="permission_snackbar_auth_auto_upload">Cryptomator ha bisogno di accesso all\'archivio per utilizzare il caricamento automatico delle foto</string>
+	<string name="permission_snackbar_notifications">Cryptomator necessita dei permessi di notifica per visualizzare lo stato della cassaforte ad esempio</string>
 	<!-- # error reports -->
 	<!-- # misc -->
 	<!-- ## file size helper -->
@@ -391,6 +421,7 @@
 	<string name="notification_auto_upload_failed_due_to_folder_not_exists">La cartella selezionata per il caricamento non è più disponibile. Vai alle impostazioni e sceglierne una nuova</string>
 	<string name="notification_auto_upload_failed_due_to_vault_locked">Cassaforte bloccata durante il caricamento, riapri la cassaforte per continuare</string>
 	<string name="notification_auto_upload_failed_due_to_vault_not_found">La cassaforte specificata per il caricamento automatico non esiste più.</string>
+	<string name="notification_auto_upload_failed_due_to_authentication_problem">Tocca per aggiornare l\'autenticazione.</string>
 	<string name="notification_open_writable_file_title">Apri file scrivibile</string>
 	<string name="notification_open_writable_file_message">La cassaforte rimane sbloccata fino alla modifica completata</string>
 	<string name="notification_update_check_finished_latest">Ultima versione installata</string>

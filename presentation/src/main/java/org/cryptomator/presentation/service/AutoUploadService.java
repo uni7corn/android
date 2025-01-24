@@ -1,8 +1,5 @@
 package org.cryptomator.presentation.service;
 
-import static org.cryptomator.domain.usecases.cloud.UploadFile.anUploadFile;
-import static java.lang.String.format;
-
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +22,8 @@ import org.cryptomator.domain.exception.FatalBackendException;
 import org.cryptomator.domain.exception.FileRemovedDuringUploadException;
 import org.cryptomator.domain.exception.MissingCryptorException;
 import org.cryptomator.domain.exception.NoSuchCloudFileException;
+import org.cryptomator.domain.exception.authentication.AuthenticationException;
+import org.cryptomator.domain.exception.authentication.WrongCredentialsException;
 import org.cryptomator.domain.repository.CloudContentRepository;
 import org.cryptomator.domain.usecases.ProgressAware;
 import org.cryptomator.domain.usecases.cloud.CancelAwareDataSource;
@@ -48,6 +47,9 @@ import java.util.List;
 import java.util.Set;
 
 import timber.log.Timber;
+
+import static org.cryptomator.domain.usecases.cloud.UploadFile.anUploadFile;
+import static java.lang.String.format;
 
 public class AutoUploadService extends Service {
 
@@ -107,7 +109,7 @@ public class AutoUploadService extends Service {
 				}
 
 				upload(progress -> updateNotification(progress.asPercentage()));
-			} catch (FatalBackendException | BackendException | MissingCryptorException e) {
+			} catch (FatalBackendException | BackendException | MissingCryptorException | AuthenticationException e) {
 				if (e instanceof NoSuchCloudFileException) {
 					notification.showFolderMissing();
 				} else if (e instanceof MissingCryptorException) {
@@ -116,6 +118,8 @@ public class AutoUploadService extends Service {
 					Timber.tag("AutoUploadService").i("Upload canceled by user");
 				} else if (wrappedStoragePermissionException(e)) {
 					notification.showPermissionNotGrantedNotification();
+				} else if (e instanceof AuthenticationException) {
+					notification.showWrongCredentialNotification((WrongCredentialsException) e);
 				} else {
 					notification.showGeneralErrorDuringUpload();
 				}

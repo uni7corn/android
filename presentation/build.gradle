@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-parcelize'
 apply plugin: 'de.mannodermaus.android-junit5'
 
 if (!liteFlavor()) {
@@ -38,11 +38,19 @@ android {
 	}
 
 	compileOptions {
-		sourceCompatibility JavaVersion.VERSION_1_8
-		targetCompatibility JavaVersion.VERSION_1_8
+		sourceCompatibility JavaVersion.VERSION_17
+		targetCompatibility JavaVersion.VERSION_17
 
 		coreLibraryDesugaringEnabled true
 	}
+
+	buildFeatures {
+		viewBinding true
+	}
+
+	defaultConfig.manifestPlaceholders = [
+			'appAuthRedirectScheme': 'org.cryptomator.android'
+	]
 
 	buildTypes {
 		release {
@@ -96,6 +104,10 @@ android {
 			applicationIdSuffix ".lite"
 			resValue "string", "app_id", androidApplicationId + applicationIdSuffix
 		}
+
+		accrescent {
+			dimension "version"
+		}
 	}
 
 	sourceSets {
@@ -108,17 +120,27 @@ android {
 		}
 
 		fdroid {
-			java.srcDirs = ['src/main/java/', 'src/apiKey/java/', 'src/fdroid/java/', 'src/fdroidAndLite/java/']
+			java.srcDirs = ['src/main/java/', 'src/apiKey/java/', 'src/fdroid/java/', 'src/fdroidLiteAccrescent/java/']
 		}
 
 		lite {
-			java.srcDirs = ['src/main/java/', 'src/lite/java/', 'src/fdroidAndLite/java/']
+			java.srcDirs = ['src/main/java/', 'src/lite/java/', 'src/fdroidLiteAccrescent/java/']
+		}
+
+		accrescent {
+			java.srcDirs = ['src/main/java/', 'src/apiKey/java/', 'src/accrescent/java/', 'src/fdroidLiteAccrescent/java/']
 		}
 	}
+
 	packagingOptions {
 		resources {
-			excludes += ['META-INF/jersey-module-version', 'META-INF/NOTICE.md', 'META-INF/DEPENDENCIES', 'META-INF/INDEX.LIST']
+			excludes += ['META-INF/jersey-module-version', 'META-INF/NOTICE.md', 'META-INF/DEPENDENCIES', 'META-INF/INDEX.LIST', 'META-INF/**/MANIFEST.MF']
 		}
+	}
+
+	dependenciesInfo {
+		// Disables dependency metadata when building APKs, see #539
+		includeInApk = false
 	}
 
 	lint {
@@ -126,6 +148,7 @@ android {
 		ignoreWarnings true
 		quiet true
 	}
+
 	namespace 'org.cryptomator.presentation'
 }
 
@@ -148,7 +171,7 @@ dependencies {
 	implementation dependencies.appcompat
 	implementation dependencies.recyclerView
 	implementation dependencies.design
-	implementation project(':subsampling-image-view')
+	implementation dependencies.scaleImageView
 	implementation dependencies.recyclerViewFastScroll
 
 	// android x
@@ -160,17 +183,26 @@ dependencies {
 	implementation dependencies.androidxPreference
 	implementation dependencies.androidxBiometric
 
+	implementation dependencies.appauth
+
 	// cloud
-	playstoreImplementation dependencies.dropbox
-	apkstoreImplementation dependencies.dropbox
-	fdroidImplementation dependencies.dropbox
+	playstoreImplementation dependencies.dropboxCore
+	playstoreImplementation dependencies.dropboxAndroid
+	apkstoreImplementation dependencies.dropboxCore
+	apkstoreImplementation dependencies.dropboxAndroid
+	fdroidImplementation dependencies.dropboxCore
+	fdroidImplementation dependencies.dropboxAndroid
+	accrescentImplementation dependencies.dropboxCore
+	accrescentImplementation dependencies.dropboxAndroid
 
 	playstoreImplementation dependencies.msgraphAuth
 	apkstoreImplementation dependencies.msgraphAuth
 	fdroidImplementation dependencies.msgraphAuth
+	accrescentImplementation dependencies.msgraphAuth
 	playstoreImplementation dependencies.msgraph
 	apkstoreImplementation dependencies.msgraph
 	fdroidImplementation dependencies.msgraph
+	accrescentImplementation dependencies.msgraph
 
 	playstoreImplementation(dependencies.googleApiServicesDrive) {
 		exclude module: 'guava-jdk5'
@@ -266,16 +298,8 @@ configurations {
 	all*.exclude group: 'com.google.guava', module: 'listenablefuture'
 }
 
-androidExtensions {
-	experimental = true
-}
-
 def liteFlavor() {
 	gradle.startParameter.taskNames.stream().filter(t -> t.toLowerCase().contains("lite")).findAny().isPresent()
-}
-
-def getApiKey(key) {
-	return !liteFlavor() ? System.getenv().getOrDefault(key, "") : ""
 }
 
 def getOnedriveApiKey() {
@@ -302,5 +326,38 @@ tasks.withType(Test) {
 		showStackTraces true
 
 		showStandardStreams = false
+	}
+}
+
+/**
+ * required to make baseline.profm deterministic, see https://issuetracker.google.com/issues/231837768
+ * remove when upgrade to AGP >= 8.1.0-alpha03
+ */
+import com.android.tools.profgen.ArtProfileKt
+import com.android.tools.profgen.ArtProfileSerializer
+import com.android.tools.profgen.DexFile
+
+project.afterEvaluate {
+	tasks.each { task ->
+		if (task.name.startsWith("compile") && task.name.endsWith("ReleaseArtProfile")) {
+			task.doLast {
+				outputs.files.each { file ->
+					if (file.name.endsWith(".profm")) {
+						println("Sorting ${file} ...")
+						def version = ArtProfileSerializer.valueOf("METADATA_0_0_2")
+						def profile = ArtProfileKt.ArtProfile(file)
+						def keys = new ArrayList(profile.profileData.keySet())
+						def sortedData = new LinkedHashMap()
+						Collections.sort keys, new DexFile.Companion()
+						keys.each { key -> sortedData[key] = profile.profileData[key] }
+						new FileOutputStream(file).with {
+							write(version.magicBytes$profgen)
+							write(version.versionBytes$profgen)
+							version.write$profgen(it, sortedData, "")
+						}
+					}
+				}
+			}
+		}
 	}
 }

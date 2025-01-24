@@ -15,6 +15,7 @@ import org.cryptomator.domain.exception.ParentFolderIsNullException
 import org.cryptomator.generator.Activity
 import org.cryptomator.generator.InjectIntent
 import org.cryptomator.presentation.R
+import org.cryptomator.presentation.databinding.ActivityLayoutBinding
 import org.cryptomator.presentation.intent.BrowseFilesIntent
 import org.cryptomator.presentation.intent.ChooseCloudNodeSettings
 import org.cryptomator.presentation.intent.ChooseCloudNodeSettings.NavigationMode.BROWSE_FILES
@@ -32,7 +33,6 @@ import org.cryptomator.presentation.model.comparator.CloudNodeModelNameZACompara
 import org.cryptomator.presentation.model.comparator.CloudNodeModelSizeBiggestFirstComparator
 import org.cryptomator.presentation.model.comparator.CloudNodeModelSizeSmallestFirstComparator
 import org.cryptomator.presentation.presenter.BrowseFilesPresenter
-import org.cryptomator.presentation.presenter.BrowseFilesPresenter.Companion.OPEN_FILE_FINISHED
 import org.cryptomator.presentation.service.CryptorsService
 import org.cryptomator.presentation.ui.activity.view.BrowseFilesView
 import org.cryptomator.presentation.ui.bottomsheet.FileSettingsBottomSheet
@@ -52,10 +52,9 @@ import org.cryptomator.presentation.ui.dialog.UploadCloudFileDialog
 import org.cryptomator.presentation.ui.fragment.BrowseFilesFragment
 import java.util.regex.Pattern
 import javax.inject.Inject
-import kotlinx.android.synthetic.main.toolbar_layout.toolbar
 
 @Activity
-class BrowseFilesActivity : BaseActivity(), //
+class BrowseFilesActivity : BaseActivity<ActivityLayoutBinding>(ActivityLayoutBinding::inflate), //
 	BrowseFilesView, //
 	BrowseFilesCallback, //
 	ReplaceDialog.Callback, //
@@ -249,14 +248,6 @@ class BrowseFilesActivity : BaseActivity(), //
 		else -> super.onMenuItemSelected(itemId)
 	}
 
-	override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
-		super.onActivityResult(requestCode, resultCode, intent)
-
-		if (requestCode == OPEN_FILE_FINISHED) {
-			browseFilesPresenter.openFileFinished()
-		}
-	}
-
 	override fun onPrepareOptionsMenu(menu: Menu): Boolean {
 		if (isNavigationMode(SELECT_ITEMS)) {
 			menu.findItem(R.id.action_delete_items).isEnabled = enableGeneralSelectionActions
@@ -273,9 +264,9 @@ class BrowseFilesActivity : BaseActivity(), //
 	}
 
 	private fun setupToolbar() {
-		toolbar.title = effectiveTitle(browseFilesIntent.folder())
-		toolbar.subtitle = effectiveSubtitle()
-		setSupportActionBar(toolbar)
+		binding.mtToolbar.toolbar.title = effectiveTitle(browseFilesIntent.folder())
+		binding.mtToolbar.toolbar.subtitle = effectiveSubtitle()
+		setSupportActionBar(binding.mtToolbar.toolbar)
 		if (hasCloudNodeSettings()) {
 			effectiveToolbarIcon(browseFilesIntent.chooseCloudNodeSettings().extraToolbarIcon())
 		}
@@ -398,9 +389,9 @@ class BrowseFilesActivity : BaseActivity(), //
 
 	override fun updateSelectionTitle(numberSelected: Int) {
 		if (numberSelected == 0) {
-			toolbar.title = getString(R.string.screen_file_browser_selection_mode_title_zero_elements)
+			binding.mtToolbar.toolbar.setTitle(R.string.screen_file_browser_selection_mode_title_zero_elements)
 		} else {
-			toolbar.title = getString(R.string.screen_file_browser_selection_mode_title_one_or_more_elements, numberSelected)
+			binding.mtToolbar.toolbar.title = getString(R.string.screen_file_browser_selection_mode_title_one_or_more_elements, numberSelected)
 		}
 	}
 
@@ -445,7 +436,7 @@ class BrowseFilesActivity : BaseActivity(), //
 	}
 
 	override fun updateTitle(folder: CloudFolderModel) {
-		toolbar.title = effectiveTitle(folder)
+		binding.mtToolbar.toolbar.title = effectiveTitle(folder)
 	}
 
 	override fun hasExcludedFolder(): Boolean {
@@ -562,7 +553,7 @@ class BrowseFilesActivity : BaseActivity(), //
 		browseFilesFragment().showLoading(loading)
 	}
 
-	private fun browseFilesFragment(): BrowseFilesFragment = getCurrentFragment(R.id.fragmentContainer) as BrowseFilesFragment
+	private fun browseFilesFragment(): BrowseFilesFragment = getCurrentFragment(R.id.fragment_container) as BrowseFilesFragment
 
 	override fun onCreateNewTextFileClicked(fileName: String) {
 		browseFilesPresenter.onCreateNewTextFileClicked(browseFilesFragment().folder, fileName)

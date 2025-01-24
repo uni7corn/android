@@ -37,7 +37,7 @@ class ChooseCloudServicePresenter @Inject constructor( //
 		val cloudTypeModels: MutableList<CloudTypeModel> = ArrayList(listOf(*CloudTypeModel.values()))
 		cloudTypeModels.remove(CloudTypeModel.CRYPTO)
 
-		if (BuildConfig.FLAVOR == "fdroid") {
+		if (BuildConfig.FLAVOR == "fdroid" || BuildConfig.FLAVOR == "accrescent") {
 			cloudTypeModels.remove(CloudTypeModel.GOOGLE_DRIVE)
 		} else if (BuildConfig.FLAVOR == "lite") {
 			cloudTypeModels.remove(CloudTypeModel.GOOGLE_DRIVE)
@@ -96,10 +96,11 @@ class ChooseCloudServicePresenter @Inject constructor( //
 
 	fun showCloudMissingSnackbarHintInLiteVariant() {
 		if (BuildConfig.FLAVOR == "lite") {
-			view?.showSnackbar(R.string.snack_bar_cryptomator_variants_hint, object: SnackbarAction {
+			view?.showSnackbar(R.string.snack_bar_cryptomator_variants_hint, object : SnackbarAction {
 				override fun onClick(v: View?) {
 					startIntent(Intents.cryptomatorVariantsIntent())
 				}
+
 				override val text: Int
 					get() = R.string.snack_bar_cryptomator_variants_title
 			})

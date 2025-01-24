@@ -25,6 +25,7 @@ import org.cryptomator.presentation.ui.activity.SettingsActivity
 import org.cryptomator.presentation.ui.dialog.DebugModeDisclaimerDialog
 import org.cryptomator.presentation.ui.dialog.DisableAppWhenObscuredDisclaimerDialog
 import org.cryptomator.presentation.ui.dialog.DisableSecureScreenDisclaimerDialog
+import org.cryptomator.presentation.ui.dialog.MicrosoftWorkaroundDisclaimerDialog
 import org.cryptomator.util.SharedPreferencesHandler
 import org.cryptomator.util.SharedPreferencesHandler.Companion.CRYPTOMATOR_VARIANTS
 import org.cryptomator.util.file.LruFileCacheUtil
@@ -103,6 +104,11 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		true
 	}
 
+	private val microsoftWorkaroundChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+		onMicrosoftWorkaroundChanged(TRUE == newValue)
+		true
+	}
+
 	private fun activity(): SettingsActivity = this.activity as SettingsActivity
 
 	private fun isBiometricAuthenticationNotAvailableRemovePreference() {
@@ -168,7 +174,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 				(findPreference(SharedPreferencesHandler.MAIL) as Preference?)?.title = format(getString(R.string.screen_settings_license_mail), sharedPreferencesHandler.mail())
 				setupUpdateCheck()
 			}
-			"fdroid", "lite" -> {
+			"fdroid", "lite", "accrescent" -> {
 				(findPreference(SharedPreferencesHandler.MAIL) as Preference?)?.title = format(getString(R.string.screen_settings_license_mail), sharedPreferencesHandler.mail())
 				removeUpdateCheck()
 			}
@@ -209,7 +215,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 	}
 
 	private fun setupCryptomatorVariants() {
-		if (BuildConfig.FLAVOR == "playstore") {
+		if (BuildConfig.FLAVOR == "playstore" || BuildConfig.FLAVOR == "accrescent") {
 			(findPreference(CRYPTOMATOR_VARIANTS) as Preference?)?.let { preference ->
 				(findPreference(getString(R.string.screen_settings_section_general)) as PreferenceCategory?)?.removePreference(preference)
 			}
@@ -227,6 +233,7 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		(findPreference(SharedPreferencesHandler.PHOTO_UPLOAD) as Preference?)?.onPreferenceChangeListener = useAutoPhotoUploadChangedListener
 		(findPreference(SharedPreferencesHandler.USE_LRU_CACHE) as Preference?)?.onPreferenceChangeListener = useLruChangedListener
 		(findPreference(SharedPreferencesHandler.LRU_CACHE_SIZE) as Preference?)?.onPreferenceChangeListener = useLruChangedListener
+		(findPreference(SharedPreferencesHandler.MICROSOFT_WORKAROUND) as Preference?)?.onPreferenceChangeListener = microsoftWorkaroundChangeListener
 		if (BuildConfig.FLAVOR == "apkstore") {
 			(findPreference(UPDATE_CHECK_ITEM_KEY) as Preference?)?.onPreferenceClickListener = updateCheckClickListener
 		}
@@ -292,12 +299,22 @@ class SettingsFragment : PreferenceFragmentCompat() {
 		(findPreference(SharedPreferencesHandler.PHOTO_UPLOAD) as SwitchPreference?)?.isChecked = enabled
 	}
 
-	fun rootView(): View {
-		return activity().findViewById(R.id.activityRootView)
-	}
-
 	fun disableAutoUpload() {
 		onUseAutoPhotoUploadChanged(false)
+	}
+
+	private fun onMicrosoftWorkaroundChanged(enabled: Boolean) {
+		if (enabled) {
+			activity().showDialog(MicrosoftWorkaroundDisclaimerDialog.newInstance())
+		}
+	}
+
+	fun deactivateMicrosoftWorkaround() {
+		sharedPreferencesHandler.setMicrosoftWorkaround(false)
+	}
+
+	fun rootView(): View {
+		return activity().findViewById(R.id.activity_root_view)
 	}
 
 	companion object {

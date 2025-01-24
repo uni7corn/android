@@ -1,3 +1,1 @@
-- Update auf das neue Material3-Design
-- Authentifizierungsfehler mit Umlauten im WebDAV-Passwort bei Verwendung der Digest-Authentifizierung behoben
-- Öffnen des Kauflinks in der F-Droid- und Website-Variante behoben
+- Hub-Unterstützung hinzugefügt

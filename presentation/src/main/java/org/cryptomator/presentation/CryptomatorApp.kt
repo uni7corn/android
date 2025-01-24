@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Build
 import android.os.IBinder
+import android.os.StrictMode
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.multidex.MultiDexApplication
 import org.cryptomator.data.cloud.crypto.Cryptors
@@ -44,16 +45,12 @@ class CryptomatorApp : MultiDexApplication(), HasComponent<ApplicationComponent>
 	override fun onCreate() {
 		super.onCreate()
 		setupLogging()
+		@Suppress("KotlinConstantConditions") //
 		val flavor = when (BuildConfig.FLAVOR) {
-			"apkstore" -> {
-				"APK Store Edition"
-			}
-			"fdroid" -> {
-				"F-Droid Edition"
-			}
-			"lite" -> {
-				"F-Droid Main Repo Edition"
-			}
+			"apkstore" -> "APK Store Edition"
+			"fdroid" -> "F-Droid Edition"
+			"lite" -> "F-Droid Main Repo Edition"
+			"accrescent" -> "Accrescent Edition"
 			else -> "Google Play Edition"
 		}
 		Timber.tag("App").i(
@@ -69,6 +66,11 @@ class CryptomatorApp : MultiDexApplication(), HasComponent<ApplicationComponent>
 		registerActivityLifecycleCallbacks(serviceNotifier)
 		AppCompatDelegate.setDefaultNightMode(SharedPreferencesHandler(applicationContext()).screenStyleMode)
 		cleanupCache()
+
+		if (SharedPreferencesHandler(applicationContext()).microsoftWorkaround()) {
+			val builder: StrictMode.VmPolicy.Builder = StrictMode.VmPolicy.Builder()
+			StrictMode.setVmPolicy(builder.build())
+		}
 
 		RxJavaPlugins.setErrorHandler { e: Throwable? -> Timber.tag("CryptomatorApp").e(e, "BaseErrorHandler detected a problem") }
 	}
@@ -141,17 +143,16 @@ class CryptomatorApp : MultiDexApplication(), HasComponent<ApplicationComponent>
 				val cloud = applicationComponent.cloudRepository().decryptedViewOf(vault)
 				startAutoUpload(cloud)
 			} else if (vault == null) {
-				autoUploadServiceBinder?.vaultNotFound()
-					?: run {
-						Timber.tag("App").i("autoUploadServiceBinder not yet initialized, manually show notification")
-						AutoUploadNotification(applicationContext, 0).showVaultNotFoundNotification()
-					}
+				autoUploadServiceBinder?.vaultNotFound() ?: run {
+					Timber.tag("App").i("autoUploadServiceBinder not yet initialized, manually show notification")
+					AutoUploadNotification(applicationContext, 0).showVaultNotFoundNotification()
+				}
 			}
 		}
 	}
 
 	private fun checkToStartAutoImageUpload(sharedPreferencesHandler: SharedPreferencesHandler): Boolean {
-		return sharedPreferencesHandler.usePhotoUpload()
+		return sharedPreferencesHandler.usePhotoUpload() //
 				&& (!sharedPreferencesHandler.autoPhotoUploadOnlyUsingWifi() || applicationComponent.networkConnectionCheck().checkWifiOnAndConnected())
 	}
 

@@ -35,6 +35,12 @@
 	<string name="error_no_such_bucket">Deze bucket is niet gevonden</string>
 	<string name="error_masterkey_location_not_supported">Aangepaste Masterkey locatie nog niet ondersteund</string>
 	<string name="error_interact_with_fdroid_but_fdroid_missing">Kan niet communiceren met de F-Droid app. Niet geïnstalleerd?</string>
+	<string name="error_hub_vault_operation_not_supported">Kluis bewerking wordt niet ondersteund voor Hub</string>
+	<string name="error_hub_authentication_failed">Verificatie van Hub is mislukt</string>
+	<string name="error_hub_device_already_register_for_other_user">Dit apparaat is al geregistreerd voor een andere gebruiker. Probeer de account te wijzigen of gebruik een ander apparaat.</string>
+	<string name="error_hub_invalid_setup_code">De accountsleutel is ongeldig.</string>
+	<string name="error_hub_invalid_version">Niet-ondersteunde Hub versie.</string>
+	<string name="error_hub_unlock_pre_31">Hub wordt alleen ondersteund op Android 12 en hoger.</string>
 	<!-- # clouds -->
 	<!-- ## cloud names -->
 	<string name="cloud_names_local_storage">Lokale opslag</string>
@@ -67,7 +73,7 @@
 	<string name="screen_vault_list_change_password_successful">Wachtwoord succesvol gewijzigd</string>
 	<!-- # screen: file browser -->
 	<string name="screen_file_browser_default_title">Kluis</string>
-	<string name="screen_file_browser_add_existing_vault_extra_text">Selecteer het Masterkey-bestand</string>
+	<string name="screen_file_browser_add_existing_vault_extra_text">Selecteer de hoofdsleutel of het kluisbestand</string>
 	<string name="screen_file_browser_create_new_vault_button_text">Plaats hier</string>
 	<string name="screen_file_browser_create_new_vault_extra_text">Kluis naam: %1$s</string>
 	<plurals name="screen_file_browser_subtitle_move">
@@ -185,7 +191,7 @@
 	<string name="screen_settings_section_auto_photo_upload_including_videos">Video\'s uploaden</string>
 	<string name="screen_settings_auto_photo_upload_title">Automatisch te uploaden bestanden opslaan in&#8230;</string>
 	<string name="screen_settings_website_label">Cryptomator website</string>
-	<string name="screen_settings_twitter_label">Volg ons op Twitter</string>
+	<string name="screen_settings_mastodon_label">Volg ons op Mastodon</string>
 	<string name="screen_settings_facebook_label">Vind ons leuk op Facebook</string>
 	<string name="screen_settings_section_legal">Juridisch</string>
 	<string name="screen_settings_licenses_label">Licenties</string>
@@ -198,6 +204,8 @@
 	<string name="screen_settings_security_label">Beveiligingstips</string>
 	<string name="screen_settings_section_version">Versie</string>
 	<string name="screen_settings_advanced_settings">Geavanceerde opties</string>
+	<string name="screen_settings_microsoft_apps_workaround_label">Workaround voor het openen van Microsoft-bestanden</string>
+	<string name="screen_settings_microsoft_apps_workaround_summary">Open bestanden in Microsoft apps met schrijfrechten</string>
 	<string name="screen_settings_background_unlock_preparation_label">Ontgrendelen versnellen</string>
 	<string name="screen_settings_background_unlock_preparation_label_summary">Download kluisconfiguratie op de achtergrond wanneer gevraagd wordt om het wachtwoord of biometrische authenticatie in te voeren</string>
 	<string name="screen_settings_keep_unlocked_while_editing_files">Ontgrendeld houden</string>
@@ -304,17 +312,18 @@
 	<string name="dialog_debug_mode_disclaimer_hint">In deze modus kunnen gevoelige gegevens naar een logbestand op je apparaat geschreven worden (bijv. bestandsnamen en paden). Wachtwoorden, cookies, etc. worden expliciet uitgesloten.\n\nVergeet niet om de foutopsporingsmodus zo snel mogelijk uit te schakelen.</string>
 	<string name="dialog_debug_mode_disclaimer_title">Aandacht</string>
 	<string name="dialog_debug_mode_positive_button">Inschakelen</string>
-	<string name="dialog_disable_app_obscured_disclaimer_hint">Deze instelling is een beveiligingsfunctie en voorkomt dat andere apps gebruikers verleiden dingen te doen die ze niet willen doen. \n\nDoor het uitschakelen, bevestigt u dat u <a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">bewust bent van de risico\'s</a>.</string>
+	<string name="dialog_microsoft_workaround_disclaimer_hint">Door een bug in Microsoft apps moet het te bewerken bestand gedeeld worden met deze apps in een publieke mediamap op je apparaat. Nadat Cryptomator is hervat, wordt het publiek toegankelijke bestand weer verwijderd, maar Cryptomator kan niet controleren wat er in de tussentijd met dit bestand is gebeurd. Zorg ervoor dat u zich bewust bent van dit effect wanneer u deze optie activeert. Dit geldt alleen voor Microsoft bestandstypen.\n\nCryptomator zal herstarten na activering.</string>
+	<string name="dialog_disable_app_obscured_disclaimer_hint">Deze instelling is een beveiligingsfunctie en voorkomt dat andere apps gebruikers misleiden en hen dingen laten doen die ze niet willen doen.\n\nDoor deze instelling uit te schakelen, bevestigt u dat u <a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">op de hoogte bent van de risico\'s</a>.</string>
 	<string name="dialog_disable_app_obscured_disclaimer_title">Aandacht</string>
 	<string name="dialog_disable_app_obscured_positive_button">Uitschakelen</string>
 	<string name="dialog_app_is_obscured_info_title">App is naar de achtergrond gewezen</string>
-	<string name="dialog_app_is_obscured_info_hint">Een andere app toont iets bovenop Cryptomator (bijv. een blauw lichtfilter of nachtmodus). Om veiligheidsredenen is Cryptomator uitgeschakeld.\n\n<a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">Hoe kunt u Cryptomator inschakelen</a></string>
+	<string name="dialog_app_is_obscured_info_hint">Een andere app geeft iets weer boven Cryptomator (bijvoorbeeld een blauwlichtfilter of nachtmodus app). Om veiligheidsredenen is Cryptomator uitgeschakeld.\n\n<a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">Hoe Cryptomator in te schakelen</a></string>
 	<string name="dialog_app_is_obscured_info_neutral_button">Sluiten</string>
 	<string name="dialog_vaults_removed_during_migration_title">Voeg de kluis voor %1\'s cloud opnieuw toe</string>
 	<string name="dialog_vaults_removed_during_migration_hint">Tijdens het migreren naar deze app versie moeten we de volgende kluizen verwijderen uit de app:\n%2s \n\nDe kluizen worden niet uit de cloud verwijderd, maar alleen uit deze app. Sorry voor het ongemak, voeg deze kluizen opnieuw toe om deze te blijven gebruiken.</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_title">Kluis is hoofdmap van de cloud-verbinding</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_hint">Maak een nieuwe cloud-verbinding waarbij je ten minste de bovenliggende map van deze kluis selecteert als hoofdmap om deze kluis toe te voegen.</string>
-	<string name="dialog_disable_secure_screen_disclaimer_hint">Deze instelling is een beveiligingsfunctie en voorkomt dat andere apps gebruikers verleiden dingen te doen die ze niet willen doen. \n\nDoor het uitschakelen, bevestigt u dat u <a href="https://docs.cryptomator.org/en/1.6/android/settings/#screen-security">bewust bent van de risico\'s</a>.</string>
+	<string name="dialog_disable_secure_screen_disclaimer_hint">Deze instelling is een beveiligingsfunctie en voorkomt dat andere apps gebruikers misleiden en hen dingen laten doen die ze niet willen doen.\n\nDoor deze instelling uit te schakelen, bevestigt u dat u <a href="https://docs.cryptomator.org/en/latest/android/settings/#screen-security">op de hoogte bent van de risico\'s</a>.</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_message">Weet je zeker dat je deze cloud verbinding wilt verwijderen?</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_hint">Deze actie zal de cloud-verbinding en alle kluizen van deze cloud verwijderen.</string>
 	<string name="dialog_confirm_delete_multiple_title">Verwijder %1$d items?</string>
@@ -346,8 +355,29 @@
 	<string name="dialog_no_more_images_to_display">Geen afbeeldingen meer om weer te geven&#8230;</string>
 	<string name="dialog_pcloud_credentials_updated_title">Gebruiksgegevens van \'%1$s\' bijgewerkt</string>
 	<string name="dialog_pcloud_credentials_updated">Als je een nieuwe pCloud account probeerde toe te voegen, klik dan op deze url <a href="https://www.pcloud.com">www.pcloud. om</a>, log de huidige account uit en klik opnieuw op de \'+\' in deze app om een nieuwe cloud verbinding te maken.</string>
+	<string name="dialog_cbc_password_vaults_migration_title">Migratie van kluis wachtwoord is vereist</string>
+	<string name="dialog_cbc_password_vaults_migration_hint">Als gevolg van verbeteringen in veiligheid vragen we u per kluis tweemaal om uw biometrische authenticatie om deze te versleutelen. Dit is nodig om je wachtwoorden met de nieuwste technologie te blijven beschermen. Indien je dit niet wilt, worden de opgeslagen wachtwoorden verwijderd.</string>
+	<string name="dialog_cbc_password_vaults_migration_action">Migreren</string>
+	<string name="dialog_create_hub_device_title">Registreer Hub apparaat</string>
+	<string name="dialog_create_hub_device_name_label">Naam</string>
+	<string name="dialog_create_hub_device_name_hint">Dit lijkt de eerste Hub toegang te zijn vanaf dit toestel. Om dit toestel te autoriseren voor toegang, moet u dit toestel benoemen.</string>
+	<string name="dialog_create_hub_device_name_empty">Het naamveld kan niet leeg zijn.</string>
+	<string name="dialog_create_hub_device_setup_code_label">Account sleutel</string>
+	<string name="dialog_create_hub_device_setup_code_hint">Uw accountsleutel is vereist om in te loggen vanuit nieuwe apps of browsers. Deze kan worden gevonden in uw profiel.</string>
+	<string name="dialog_create_hub_device_setup_code_empty">Accountsleutelveld kan niet leeg zijn.</string>
+	<string name="dialog_progress_creating_hub_device_setup">Aanmaken van apparaat&#8230;</string>
+	<string name="dialog_hub_vault_access_forbidden_title">Toegang geweigerd</string>
+	<string name="dialog_hub_vault_access_forbidden_hint">Uw gebruiker is nog niet geautoriseerd om toegang te krijgen tot deze kluis. Vraag de eigenaar van de kluis om toestemming te geven.\"</string>
+	<string name="dialog_hub_license_upgrade_required_title">Controleer de Hub-licentie</string>
+	<string name="dialog_hub_license_upgrade_required_hint">Uw Cryptomator Hub-exemplaar heeft een ongeldige licentie. Informeer een Hub-beheerder om de licentie te upgraden of te verlengen.\"</string>
+	<string name="dialog_hub_vault_archived_title">Kluis gearchiveerd</string>
+	<string name="dialog_hub_vault_archived_hint">Deze kluis is gearchiveerd en kan niet worden ontgrendeld. Om het te ontgrendelen, moet een kluiseigenaar het archief uit het archief halen.</string>
+	<string name="dialog_hub_user_setup_required_title">Instellen van gebruiker vereist</string>
+	<string name="dialog_hub_user_setup_required_hint">Om verder te gaan, gelieve de stappen te voltooien in uw Hub-gebruikersprofiel.</string>
+	<string name="dialog_hub_user_setup_required_neutral_button">Ga naar Profiel</string>
 	<string name="permission_snackbar_auth_local_vault">Cryptomator heeft toegang tot opslag nodig om lokale kluizen te kunnen gebruiken</string>
 	<string name="permission_snackbar_auth_auto_upload">Cryptomator heeft toegang tot opslag nodig om automatisch uploaden van foto\'s te kunnen gebruiken</string>
+	<string name="permission_snackbar_notifications">Cryptomator heeft notificatie toegang nodig om een voorbeeld van de kluis status weer te geven</string>
 	<!-- # error reports -->
 	<!-- # misc -->
 	<!-- ## file size helper -->
@@ -391,6 +421,7 @@
 	<string name="notification_auto_upload_failed_due_to_folder_not_exists">Geselecteerde map voor uploaden is niet meer beschikbaar. Ga naar instellingen en kies een nieuwe</string>
 	<string name="notification_auto_upload_failed_due_to_vault_locked">Kluis vergrendeld tijdens het uploaden, heropen de kluis om door te gaan</string>
 	<string name="notification_auto_upload_failed_due_to_vault_not_found">De gekozen kluis voor automatische upload bestaat niet meer.</string>
+	<string name="notification_auto_upload_failed_due_to_authentication_problem">Aantikken om de authenticatie te vernieuwen.</string>
 	<string name="notification_open_writable_file_title">Open schrijfbaar bestand</string>
 	<string name="notification_open_writable_file_message">Kluis blijft ontgrendeld tot het bewerken voltooid is</string>
 	<string name="notification_update_check_finished_latest">Laatste versie geïnstalleerd</string>

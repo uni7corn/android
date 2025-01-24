@@ -32,9 +32,15 @@
 	<string name="error_vault_key_invalid">%1$s não coincide com este %2$s</string>
 	<string name="error_vault_config_loading">Erro geral ao carregar a configuração do cofre</string>
 	<string name="error_file_not_found_after_opening_using_3party">O arquivo local não está mais presente depois de voltar ao Cryptomator. Possíveis alterações não podem ser propagadas de volta para o provedor de nuvem.</string>
-	<string name="error_no_such_bucket">Não existe tal bucket no nome de domínio</string>
+	<string name="error_no_such_bucket">Bucket não encontrado</string>
 	<string name="error_masterkey_location_not_supported">Localização de Masterkey personalizada ainda não é suportada</string>
 	<string name="error_interact_with_fdroid_but_fdroid_missing">Falha na comunicação com o aplicativo F-Droid. Ele está instalado?</string>
+	<string name="error_hub_vault_operation_not_supported">Operação de cofre não suportada para Hub</string>
+	<string name="error_hub_authentication_failed">A autenticação para o Hub falhou</string>
+	<string name="error_hub_device_already_register_for_other_user">Este dispositivo já está registrado para um usuário diferente. Tente alterar a conta de usuário ou use um dispositivo diferente.</string>
+	<string name="error_hub_invalid_setup_code">A Chave da Conta é inválida.</string>
+	<string name="error_hub_invalid_version">Versão do Hub não suportada.</string>
+	<string name="error_hub_unlock_pre_31">Hub só é suportado no Android 12 ou superior.</string>
 	<!-- # clouds -->
 	<!-- ## cloud names -->
 	<string name="cloud_names_local_storage">Armazenamento Local</string>
@@ -67,7 +73,7 @@
 	<string name="screen_vault_list_change_password_successful">Senha alterada com sucesso</string>
 	<!-- # screen: file browser -->
 	<string name="screen_file_browser_default_title">Cofre</string>
-	<string name="screen_file_browser_add_existing_vault_extra_text">Selecionar arquivo masterkey</string>
+	<string name="screen_file_browser_add_existing_vault_extra_text">Selecione o arquivo masterkey ou vault</string>
 	<string name="screen_file_browser_create_new_vault_button_text">Coloque aqui</string>
 	<string name="screen_file_browser_create_new_vault_extra_text">Nome do Cofre: %1$s</string>
 	<plurals name="screen_file_browser_subtitle_move">
@@ -132,16 +138,16 @@
 	<string name="screen_webdav_settings_msg_password_must_not_be_empty">A senha não pode estar vazia.</string>
 	<!-- ## screen: s3 settings -->
 	<string name="screen_s3_settings_display_name_label">Nome de Exibição</string>
-	<string name="screen_s3_settings_access_key_label">Chave de acesso</string>
+	<string name="screen_s3_settings_access_key_label">Chave de Acesso</string>
 	<string name="screen_s3_settings_secret_key_label">Chave Secreta</string>
-	<string name="screen_s3_settings_bucket_label">Bucket do nome de domínio na URL existente</string>
+	<string name="screen_s3_settings_bucket_label">Bucket existente</string>
 	<string name="screen_s3_settings_endpoint_label">Endpoint</string>
 	<string name="screen_s3_settings_region_label">Região</string>
-	<string name="screen_s3_settings_msg_display_name_not_empty">O nome de exibição não pode estar em branco</string>
-	<string name="screen_s3_settings_msg_access_key_not_empty">Chave de acesso não pode estar em branco</string>
-	<string name="screen_s3_settings_msg_secret_key_not_empty">A chave secreta não pode estar em branco</string>
-	<string name="screen_s3_settings_msg_bucket_not_empty">Bucket do nome de domínio da URL não pode estar em branco</string>
-	<string name="screen_s3_settings_msg_endpoint_and_region_not_empty">Endpoint ou Região não pode estar em branco</string>
+	<string name="screen_s3_settings_msg_display_name_not_empty">Nome de Exibição não pode estar vazio</string>
+	<string name="screen_s3_settings_msg_access_key_not_empty">Chave de Acesso não pode estar vazia</string>
+	<string name="screen_s3_settings_msg_secret_key_not_empty">Chave Secreta não pode estar vazia</string>
+	<string name="screen_s3_settings_msg_bucket_not_empty">Bucket não pode estar vazio</string>
+	<string name="screen_s3_settings_msg_endpoint_and_region_not_empty">Endpoint e Região não podem estar vazios</string>
 	<!-- ## screen: enter vault name -->
 	<string name="screen_enter_vault_name_msg_name_empty">O nome do cofre não pode estar em branco.</string>
 	<string name="screen_enter_vault_name_vault_label">Nome do cofre</string>
@@ -149,7 +155,7 @@
 	<!-- ## screen: set password -->
 	<string name="screen_set_password_title">Definir senha</string>
 	<string name="screen_set_password_msg_password_mismatch">A senha não coincide com a senha digitada.</string>
-	<string name="screen_set_password_button_text">Pronto</string>
+	<string name="screen_set_password_button_text">Concluído</string>
 	<string name="screen_set_password_hint">IMPORTANTE: Se você esquecer sua senha, não há como recuperar seus dados.</string>
 	<string name="screen_set_password_retype_password_label">Redigite a senha</string>
 	<string name="screen_set_password_strength_indicator_0">Senha muito fraca para criar um cofre</string>
@@ -180,12 +186,11 @@
 	<string name="screen_settings_section_auto_photo_upload_toggle">Ativar</string>
 	<string name="screen_settings_section_auto_photo_upload_toggle_summary">Capture imagens em segundo plano e assim que o cofre selecionado for desbloqueado, inicie o upload</string>
 	<string name="screen_settings_section_auto_photo_upload_toggle_instant_upload">Upload instantâneo</string>
-	<string name="screen_settings_section_auto_photo_upload_toggle_instant_upload_summary">Envie diretamente se o cofre estiver desbloqueado</string>
+	<string name="screen_settings_section_auto_photo_upload_toggle_instant_upload_summary">Enviar imediatamente se o cofre estiver desbloqueado</string>
 	<string name="screen_settings_section_auto_photo_upload_only_wifi_toggle">Fazer upload apenas usando o WIFI</string>
 	<string name="screen_settings_section_auto_photo_upload_including_videos">Upload de vídeos</string>
 	<string name="screen_settings_auto_photo_upload_title">Salvar upload automático de arquivos em&#8230;</string>
 	<string name="screen_settings_website_label">Site Cryptomator</string>
-	<string name="screen_settings_twitter_label">Siga-nos no Twitter</string>
 	<string name="screen_settings_facebook_label">Curta nossa página no Facebook</string>
 	<string name="screen_settings_section_legal">Políticas legais</string>
 	<string name="screen_settings_licenses_label">Licenças</string>
@@ -198,6 +203,8 @@
 	<string name="screen_settings_security_label">Dicas de segurança</string>
 	<string name="screen_settings_section_version">Versão</string>
 	<string name="screen_settings_advanced_settings">Configurações Avançadas</string>
+	<string name="screen_settings_microsoft_apps_workaround_label">Solucionar a abertura dos arquivos Microsoft</string>
+	<string name="screen_settings_microsoft_apps_workaround_summary">Abrir arquivos em apps da Microsoft com permissão de gravação</string>
 	<string name="screen_settings_background_unlock_preparation_label">Desbloqueio acelerado</string>
 	<string name="screen_settings_background_unlock_preparation_label_summary">Baixe a configuração do cofre em segundo plano quando solicitado para inserir a senha ou o reconhecimento biométrico</string>
 	<string name="screen_settings_keep_unlocked_while_editing_files">Manter desbloqueado</string>
@@ -289,11 +296,11 @@
 	<string name="dialog_accept_ssl_certificate_title">Certificado SSL inválido</string>
 	<string name="dialog_accept_ssl_certificate_hint">O certificado SSL é inválido. Deseja confiar nele mesmo assim?</string>
 	<string name="dialog_accept_ssl_certificate_details">Detalhes</string>
-	<string name="dialog_accept_ssl_certificate_security_checkbox">Isto pode ser um risco para a segurança. Eu sei o que estou fazendo.</string>
+	<string name="dialog_accept_ssl_certificate_security_checkbox">Isto pode ser um risco de segurança. Eu sei o que estou fazendo.</string>
 	<string name="dialog_ask_ignore_battery_optimizations_title">Desativar otimizações de bateria</string>
 	<string name="dialog_ask_ignore_battery_optimizations_hint">Para recuperar novas fotos e vídeos sem executar em segundo plano, precisamos desativar as otimizações de bateria. Mas não se preocupe, %1$s não consome muita energia.\n\nPara aplicar, altere \'Não otimizado\' para \'Todos os aplicativos\', selecione %1$s e escolha \'Não otimizar\' depois de tocar \'%2$s\' nesta caixa de diálogo.</string>
-	<string name="dialog_ask_ignore_battery_optimizations_checkbox">Não pergunte novamente</string>
-	<string name="dialog_http_security_hint">O uso de HTTP é inseguro. Recomendamos a utilização de HTTPS. Se você souber os riscos, você pode continuar com o HTTP.</string>
+	<string name="dialog_ask_ignore_battery_optimizations_checkbox">Não perguntar novamente?</string>
+	<string name="dialog_http_security_hint">O uso de HTTP é inseguro. Recomendamos utilizar HTTPS. Se você conhecer os riscos, pode continuar com HTTP.</string>
 	<string name="dialog_http_security_checkbox">Mudar para HTTPS</string>
 	<string name="dialog_http_security_title">Usar HTTPS?</string>
 	<string name="dialog_no_screen_lock_hint">Nenhum bloqueio de tela foi configurado. Para armazenar suas credenciais de forma segura, configure com OK um padrão ou senha.</string>
@@ -304,17 +311,18 @@
 	<string name="dialog_debug_mode_disclaimer_hint">Neste modo, dados confidenciais podem ser gravados em um arquivo de log no seu dispositivo (por exemplo, nomes de arquivos e caminhos). Senhas, cookies, etc. são explicitamente excluídos.\n\nLembre-se de desativar o modo de depuração o mais rápido possível.</string>
 	<string name="dialog_debug_mode_disclaimer_title">Atenção</string>
 	<string name="dialog_debug_mode_positive_button">Habilitar</string>
-	<string name="dialog_disable_app_obscured_disclaimer_hint">Esta configuração é um recurso de segurança e impede que outros aplicativos induzam os usuários a fazer coisas que não devem fazer.\n\nAo desativar, você confirma que está <a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">ciente dos riscos</a>.</string>
+	<string name="dialog_microsoft_workaround_disclaimer_hint">Devido a um erro em applicativos da Microsoft, o arquivo a ser editado deve ser compartilhado com esses aplicativos em uma pasta de mídia pública em seu dispositivo. Depois que o Cryptomator é reiniciado, o arquivo acessível ao público será apagado novamente, mas o Cryptomator não pode influenciar o que aconteceu a este arquivo. Esteja ciente desse comportamento ao ativar esta opção. Isso só se aplicará aos tipos de arquivos da Microsoft.\n\nO Cryptomator reiniciará após a ativação.</string>
+	<string name="dialog_disable_app_obscured_disclaimer_hint">Esta configuração é um recurso de segurança e impede que outros aplicativos induzam os usuários a fazer coisas que não devem fazer.\n\nAo desativar, você confirma que está <a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">ciente dos riscos</a>.</string>
 	<string name="dialog_disable_app_obscured_disclaimer_title">Atenção</string>
 	<string name="dialog_disable_app_obscured_positive_button">Desabilitar</string>
-	<string name="dialog_app_is_obscured_info_title">O aplicativo está escuro</string>
-	<string name="dialog_app_is_obscured_info_hint">Outro aplicativo está exibindo algo no topo do Cryptomator (por exemplo, um filtro de luz azul ou aplicativo de modo noturno). Por razões de segurança, o Cryptomator está desativado.\n\n<a href="https://docs.cryptomator.org/en/1.6/android/settings/#block-app-when-obscured">Como ativar o Cryptomator</a></string>
+	<string name="dialog_app_is_obscured_info_title">O aplicativo está obscurecido</string>
+	<string name="dialog_app_is_obscured_info_hint">Outro aplicativo está exibindo algo no topo do Cryptomator (por exemplo, um filtro de luz azul ou aplicativo de modo noturno). Por razões de segurança, o Cryptomator está desativado.\n\n<a href="https://docs.cryptomator.org/en/latest/android/settings/#block-app-when-obscured">Como ativar o Cryptomator</a></string>
 	<string name="dialog_app_is_obscured_info_neutral_button">Fechar</string>
-	<string name="dialog_vaults_removed_during_migration_title">Por favor, readicione cofres para %1s nuvem</string>
+	<string name="dialog_vaults_removed_during_migration_title">Por favor, readicione cofres para a nuvem %1s</string>
 	<string name="dialog_vaults_removed_during_migration_hint">Durante a migração para esta versão do aplicativo, precisamos remover os seguintes cofres do aplicativo:\n%2s \n\nEsses cofres não são removidos da nuvem, mas apenas deste aplicativo. Desculpe o incômodo e por favor adicione novamente estes cofres para continuar a trabalhar com eles.</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_title">O cofre é a pasta raiz da conexão com a nuvem</string>
 	<string name="dialog_vault_is_root_folder_of_cloud_hint">Crie uma nova conexão com a nuvem onde você seleciona pelo menos a pasta principal desta pasta de cofre como o diretório raiz para adicionar este cofre.</string>
-	<string name="dialog_disable_secure_screen_disclaimer_hint">Esta configuração é um recurso de segurança e impede que outros aplicativos induzam os usuários a fazer coisas que não devem fazer.\n\nAo desativar, você confirma que está <a href="https://docs.cryptomator.org/en/1.6/android/settings/#screen-security">ciente dos riscos</a>.</string>
+	<string name="dialog_disable_secure_screen_disclaimer_hint">Esta configuração é um recurso de segurança e impede que outros aplicativos induzam os usuários a fazer coisas que não devem fazer.\n\nAo desativar, você confirma que está <a href="https://docs.cryptomator.org/en/latest/android/settings/#screen-security">ciente dos riscos</a>.</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_message">Tem certeza de que deseja remover esta conexão com a nuvem?</string>
 	<string name="dialog_delete_cloud_connection_with_vaults_hint">Esta ação removerá a conexão com o provedor de nuvem e todos os cofres desta nuvem.</string>
 	<string name="dialog_confirm_delete_multiple_title">Excluir %1$d itens?</string>
@@ -323,7 +331,7 @@
 	<string name="dialog_confirm_delete_folder_message">Isto irá apagar todo o conteúdo da pasta. Tem certeza que deseja excluir esta pasta?</string>
 	<string name="dialog_biometric_auth_key_invalidated_title">Recurso de autenticação biométrica desativado</string>
 	<string name="dialog_biometric_auth_key_invalidated_message">Como a chave foi invalidada, o recurso de autenticação biométrica foi desativado. Para reativar, abra as configurações do Cryptomator.</string>
-	<string name="dialog_enter_license_title">Fornecer uma licença válida</string>
+	<string name="dialog_enter_license_title">Forneça uma licença válida</string>
 	<string name="dialog_enter_license_content">Nós detectamos que você instalou o Cryptomator sem usar a Google Play Store. Forneça uma licença válida, que pode ser comprada em <a href="https://cryptomator.org/android/">https://cryptomator.org/android/</a></string>
 	<string name="dialog_enter_license_not_valid_content">A licença fornecida não é válida. Verifique se você digitou corretamente.</string>
 	<string name="dialog_enter_license_not_valid_content_desktop_supporter_certificate">A chave fornecida é um certificado de suporte da área de trabalho. Por favor, insira uma licença válida.</string>
@@ -346,8 +354,29 @@
 	<string name="dialog_no_more_images_to_display">Sem mais imagens para exibir&#8230;</string>
 	<string name="dialog_pcloud_credentials_updated_title">Credenciais de \'%1$s\' atualizadas</string>
 	<string name="dialog_pcloud_credentials_updated">Se você pretende adicionar uma nova conta pCloud, toque neste link <a href="https://www.pcloud.com">www.pcloud.com</a>, saia da conta atual e toque novamente no \'+\' neste aplicativo para criar uma nova conexão de nuvem.</string>
+	<string name="dialog_cbc_password_vaults_migration_title">Migração da senha do cofre necessária</string>
+	<string name="dialog_cbc_password_vaults_migration_hint">Devido a aprimoramentos de segurança, você será solicitado pela sua autenticação biométrica duas vezes para cada cofre para recriptografar as senhas do seu cofre. Isto é necessário para continuar a proteger as senhas do seu cofre com a tecnologia mais recente. Se você não deseja que isso aconteça, as senhas armazenadas serão removidas.</string>
+	<string name="dialog_cbc_password_vaults_migration_action">Migrar</string>
+	<string name="dialog_create_hub_device_title">Registrar o dispositivo do Hub</string>
+	<string name="dialog_create_hub_device_name_label">Nome</string>
+	<string name="dialog_create_hub_device_name_hint">Parece ser o primeiro acesso do Hub a partir deste dispositivo. Para identificá-lo para autorização de acesso, você precisa nomear este dispositivo.</string>
+	<string name="dialog_create_hub_device_name_empty">Nome não pode estar vazio.</string>
+	<string name="dialog_create_hub_device_setup_code_label">Chave da Conta</string>
+	<string name="dialog_create_hub_device_setup_code_hint">Sua Chave de Conta é necessária para acessar a partir de novos aplicativos ou navegadores. Ela pode ser encontrada no seu perfil.</string>
+	<string name="dialog_create_hub_device_setup_code_empty">Chave da Conta não pode estar vazia.</string>
+	<string name="dialog_progress_creating_hub_device_setup">Criando dispositivo&#8230;</string>
+	<string name="dialog_hub_vault_access_forbidden_title">Acesso negado</string>
+	<string name="dialog_hub_vault_access_forbidden_hint">Seu dispositivo ainda não foi autorizado a acessar este cofre. Peça ao proprietário do cofre para autorizá-lo.\"</string>
+	<string name="dialog_hub_license_upgrade_required_title">Verifique a licença do Hub</string>
+	<string name="dialog_hub_license_upgrade_required_hint">Sua instância do Cryptomator Hub possui uma licença inválida. Por favor, informe a um administrador do Hub que atualize ou renove a licença.\"</string>
+	<string name="dialog_hub_vault_archived_title">Cofre arquivado</string>
+	<string name="dialog_hub_vault_archived_hint">Este cofre está arquivado e não pode ser desbloqueado. Para desbloqueá-lo, o proprietário do cofre deve desarquivá-lo.</string>
+	<string name="dialog_hub_user_setup_required_title">Configuração de usuário necessária</string>
+	<string name="dialog_hub_user_setup_required_hint">Para prosseguir, por favor preencha as etapas necessárias no seu perfil de usuário do Hub.</string>
+	<string name="dialog_hub_user_setup_required_neutral_button">Ir para o Perfil</string>
 	<string name="permission_snackbar_auth_local_vault">Cryptomator precisa de permissão de acesso ao armazenamento para fazer upload de arquivos</string>
 	<string name="permission_snackbar_auth_auto_upload">Cryptomator precisa de permissão de acesso ao armazenamento para fazer upload de arquivos</string>
+	<string name="permission_snackbar_notifications">O Cryptomator precisa de permissões para notificar o estado dos cofres, por exemplo.</string>
 	<!-- # error reports -->
 	<!-- # misc -->
 	<!-- ## file size helper -->
@@ -367,14 +396,14 @@
 	<string name="time_unit_days_sg">dia</string>
 	<string name="time_unit_days_pl">dias</string>
 	<string name="time_unit_weeks_sg">semana</string>
-	<string name="time_unit_weeks_pl">Semanas</string>
+	<string name="time_unit_weeks_pl">semanas</string>
 	<string name="time_unit_months_sg">mês</string>
 	<string name="time_unit_months_pl">meses</string>
 	<string name="time_unit_years_sg">ano</string>
 	<string name="time_unit_years_pl">anos</string>
 	<!-- ## biometric authentication -->
 	<string name="dialog_biometric_auth_title">Acesso biométrico</string>
-	<string name="dialog_biometric_auth_message">Faça login usando suas credenciais biométricas</string>
+	<string name="dialog_biometric_auth_message">Desbloqueie usando credencial biométrica</string>
 	<string name="dialog_biometric_auth_use_password">Usar senha do cofre</string>
 	<string name="dialog_unable_to_auto_upload_files_title">Não foi possível carregar arquivos automaticamente</string>
 	<!-- notification -->
@@ -383,20 +412,21 @@
 	<string name="notification_lock_all">Bloquear todos</string>
 	<string name="notification_cancel_auto_upload">Cancelar upload</string>
 	<string name="notification_auto_upload_title">Upload automático de fotos em execução</string>
-	<string name="notification_auto_upload_message">Uploading %1d/%2d</string>
+	<string name="notification_auto_upload_message">Enviando %1d/%2d</string>
 	<string name="notification_auto_upload_finished_title">Upload automático de fotos concluído</string>
 	<string name="notification_auto_upload_finished_message">%1$d imagens enviadas para o cofre</string>
 	<string name="notification_auto_upload_failed_title">O upload automático de foto falhou</string>
 	<string name="notification_auto_upload_failed_general_error">Ocorreu um erro geral durante o upload.</string>
-	<string name="notification_auto_upload_failed_due_to_folder_not_exists">A pasta selecionada para envio não está mais disponível. Vá para configurações e escolha uma nova pasta</string>
-	<string name="notification_auto_upload_failed_due_to_vault_locked">Cofre trancado durante o upload, por favor reabra o cofre para continuar</string>
+	<string name="notification_auto_upload_failed_due_to_folder_not_exists">A pasta escolhida para envio não está mais disponível. Vá até configurações e escolha uma nova pasta</string>
+	<string name="notification_auto_upload_failed_due_to_vault_locked">O cofre foi bloqueado durante o upload, por favor desbloqueie o cofre para continuar</string>
 	<string name="notification_auto_upload_failed_due_to_vault_not_found">O cofre especificado para upload automático não existe mais.</string>
+	<string name="notification_auto_upload_failed_due_to_authentication_problem">Toque para atualizar a autenticação.</string>
 	<string name="notification_open_writable_file_title">Abrir arquivo gravável</string>
-	<string name="notification_open_writable_file_message">Cofre permanece desbloqueado até terminar de editar</string>
+	<string name="notification_open_writable_file_message">O cofre permanece desbloqueado até terminar de editar</string>
 	<string name="notification_update_check_finished_latest">Versão mais recente instalada</string>
 	<string name="notification_authenticating">Autenticando&#8230;</string>
 	<string name="screen_settings_lru_cache">Cache</string>
-	<string name="screen_settings_lru_cache_toggle_summary">Cache de arquivos acessados recentemente criptografados localmente no dispositivo para reutilização posterior quando reaberto</string>
+	<string name="screen_settings_lru_cache_toggle_summary">Cache para arquivos acessados recentemente para reutilização posterior quando reabertos</string>
 	<string name="screen_settings_lru_cache_size">Tamanho total do cache</string>
 	<string name="screen_settings_clear_lru_cache_size">Limpar Cache</string>
 	<string name="screen_settings_lru_cache_changed__restart_toast">As alterações serão aplicadas na próxima reinicialização do aplicativo</string>
@@ -407,7 +437,7 @@
 	<string name="screen_settings_last_check_updates">Última execução %1$s</string>
 	<string name="dialog_cache_size_title">Tamanho do cache por provedor de nuvem</string>
 	<!-- lock timeout names -->
-	<string name="lock_timeout_instant">Instantâneo</string>
+	<string name="lock_timeout_instant">Instante</string>
 	<string name="lock_timeout_1m">1 minuto</string>
 	<string name="lock_timeout_2m">2 minutos</string>
 	<string name="lock_timeout_5m">5 minutos</string>

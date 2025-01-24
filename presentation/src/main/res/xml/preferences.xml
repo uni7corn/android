@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/activityRootView">
+	android:id="@+id/activity_root_view">
 
 	<PreferenceCategory
 		android:key="license"
@@ -169,16 +169,22 @@
 	<PreferenceCategory android:title="@string/screen_settings_advanced_settings">
 
 		<SwitchPreference
-			android:defaultValue="true"
-			android:key="backgroundUnlockPreparation"
-			android:summary="@string/screen_settings_background_unlock_preparation_label_summary"
-			android:title="@string/screen_settings_background_unlock_preparation_label" />
+			android:defaultValue="false"
+			android:key="shareOfficeFilePublicly"
+			android:summary="@string/screen_settings_microsoft_apps_workaround_summary"
+			android:title="@string/screen_settings_microsoft_apps_workaround_label" />
 
 		<SwitchPreference
 			android:defaultValue="false"
 			android:key="keepUnlockedWhileEditing"
 			android:summary="@string/screen_settings_keep_unlocked_while_editing_files_summary"
 			android:title="@string/screen_settings_keep_unlocked_while_editing_files" />
+
+		<SwitchPreference
+			android:defaultValue="true"
+			android:key="backgroundUnlockPreparation"
+			android:summary="@string/screen_settings_background_unlock_preparation_label_summary"
+			android:title="@string/screen_settings_background_unlock_preparation_label" />
 
 	</PreferenceCategory>
 
@@ -190,10 +196,10 @@
 				android:data="@string/screen_settings_website_uri" />
 		</androidx.preference.PreferenceScreen>
 
-		<androidx.preference.PreferenceScreen android:title="@string/screen_settings_twitter_label">
+		<androidx.preference.PreferenceScreen android:title="@string/screen_settings_mastodon_label">
 			<intent
 				android:action="android.intent.action.VIEW"
-				android:data="@string/screen_settings_twitter_uri" />
+				android:data="@string/screen_settings_mastodon_uri" />
 		</androidx.preference.PreferenceScreen>
 
 		<androidx.preference.PreferenceScreen android:title="@string/screen_settings_facebook_label">
